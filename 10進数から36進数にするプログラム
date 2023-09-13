@@ -4,10 +4,10 @@ int main(){
 int n;cin>>n;
 string s="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 string ans;
-while(b){
-    int c=b%36;
+while(n){
+    int c=n%36;
     ans+=s[c];
-    b/=36;
+    n/=36;
 }
 reverse(ans.begin(),ans.end());
 cout<<ans<<endl;
