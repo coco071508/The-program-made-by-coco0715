@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define yes (cout<<"Yes"<<endl)
+#define no (cout<<"No"<<endl)
+int main(){
+int n,m;cin>>n>>m;//頂点と辺の数
+vector<vector<int>> G(n+1);//グラフ
+int a,b;
+while(m--){
+    cin>>a>>b;
+    G[a].push_back(b);
+    G[b].push_back(a);
+}//どの頂点と頂点を結ぶかを入力
+int yet=n;//まだ探索していない頂点の数
+int start,goal;cin>>start>>goal;//startとgoalを入力
+set<int> v;//通った頂点の記録
+vector<int> r;//道の記録
+vector<int> se(n,1);//その頂点をすでに通ったかどうか判定
+r.push_back(start);v.insert(start);se[start]=0;
+//全部通ったら終わり
+while(yet){
+    int q=r.size();
+    //辺を探索する（?）
+    for(int i:G[r[r.size()-1]]){
+        if(v.count(i)){}
+        else if(se[i]){
+            r.push_back(i);
+            v.insert(i);
+            se[i]=0;
+            break;
+        }
+    }
+    //goalに着いたか見る
+    if(r[r.size()-1]==goal){
+        yes;return 0;
+    }
+    //その頂点が最後だったら1つ戻る。
+    if(r.size()==q){
+        v.erase(r[r.size()-1]);
+        r.pop_back();
+    }
+}no;
+}
